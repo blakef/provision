@@ -10,8 +10,10 @@ sudo xcodebuild -license
 sudo easy_install pip
 
 # SSH RSA Key
-HOST=$(ipconfig getpacket en0 | grep 'domain_name (string)' | awk '{ print $3 }')
-ssh-keygen -t rsa -C "$(whoami)@$HOST" -q -N "" -f ~/.ssh/id_rsa
+if [ ! -e "$HOME/.ssh/id_rsa" ]; then
+    HOST=$(ipconfig getpacket en0 | grep 'domain_name (string)' | awk '{ print $3 }')
+    ssh-keygen -t rsa -C "$(whoami)@$HOST" -q -N "" -f ~/.ssh/id_rsa
+fi
 
 # Brew
 TRAVIS=true /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -37,7 +39,8 @@ nvm install node
 nvm alias default $(nvm current)
 
 # Node Packages
-npm i -g tern commitizen cz-conventional-changelog eslint typescript
+npm i -g yarn
+yarn add -g commitizen cz-conventional-changelog eslint typescript
 
 # Enable remote ssh login
 sudo systemsetup -setremotelogin on
