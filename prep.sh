@@ -9,6 +9,9 @@ sudo xcodebuild -license
 # Pip
 sudo easy_install pip
 
+# Git
+cat .gitconfig >> "$HOME/.gitconfig"
+
 # SSH RSA Key
 if [ ! -e "$HOME/.ssh/id_rsa" ]; then
     HOST=$(ipconfig getpacket en0 | grep 'domain_name (string)' | awk '{ print $3 }')
@@ -19,16 +22,19 @@ fi
 TRAVIS=true /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Common Applications
-brew install vim cmake
+brew install cmake coreutils
+brew install vim --override-system-vi
+brew install gnu-sed --with-default-names
 brew tap caskroom/cask
 brew cask install \
     google-chrome \
     sublime-text \
     iterm2 \
-    macvim \
     spotify \
     hipchat \
+    slack \
     caskroom/versions/firefoxdeveloperedition 
+brew cask install macvim --override-system-vim --custom-system-icons
 
 # NVM and Node
 touch ~/.bash_profile
@@ -53,5 +59,6 @@ mkdir -p ~/.vim/bundle && \
     git clone https://github.com/blakef/vim-config ~/.vim-config && \
     ln -s ~/.vim-config/.vimrc ~/.vimrc && \
     vim +PluginInstall +qall && \
-    ( cd ~/.vim/bundle/YouCompleteMe; python install.py --clang-completer --tern-completer)
+    ( cd ~/.vim/bundle/YouCompleteMe; python install.py --clang-completer --tern-completer --gocode-completer)
 
+sed -i'' 's/wombat256mod/wombat256/' .vim/bundle/wombat256/colors/wombat256.vim

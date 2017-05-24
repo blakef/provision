@@ -1,0 +1,9 @@
+credential.helper=osxkeychain
+alias.l=log --oneline --decorate
+alias.lg=!git lg-specific --all
+alias.pb=!git push -u origin $(git rev-parse --abbrev-ref HEAD)
+alias.pat=commit --amend --no-edit
+alias.lg-specific=log --graph --abbrev-commit --decorate --format=format:‘%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n’'          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+push.default=simple
+diff.tool=vimdiff
+core.editor=/usr/bin/vim
