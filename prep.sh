@@ -33,6 +33,7 @@ brew cask install \
     spotify \
     hipchat \
     slack \
+    shiftit \
     caskroom/versions/firefoxdeveloperedition 
 brew cask install macvim --override-system-vim --custom-system-icons
 
