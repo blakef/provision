@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pushd ~/
+
 # Update System & commandline tools 
 softwareupdate -ia
 
@@ -16,7 +18,11 @@ read -p "(git config) What email address do you go by on GitHub/Lab/Work? " EMAI
 echo
 
 FULLNAME=${TMP_NAME:-$FULLNAME}
-cat .gitconfig >> "$HOME/.gitconfig"
+if [ "$HOME" -ne "$(pwd)" ]; then
+    cat .gitconfig > "$HOME/.gitconfig"
+else
+    echo "[user]" >> "$HOME/.gitconfig"
+fi
 echo -e "\tname = $FULLNAME\n\temail = $EMAIL" >> "$HOME/.gitconfig"
 
 # SSH RSA Key
@@ -69,4 +75,6 @@ mkdir -p ~/.vim/bundle && \
     vim +PluginInstall +qall && \
     ( cd ~/.vim/bundle/YouCompleteMe; python install.py --clang-completer --tern-completer --gocode-completer)
 
-sed -i'' 's/wombat256mod/wombat256/' .vim/bundle/wombat256/colors/wombat256.vim
+sed -i'' 's/wombat256mod/wombat256/' ~/.vim/bundle/wombat256/colors/wombat256.vim
+
+popd
