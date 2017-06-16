@@ -10,7 +10,14 @@ sudo xcodebuild -license
 sudo easy_install pip
 
 # Git
+FULLNAME=`id -F`
+read -p "(git config) What is your full name sailor (default: $FULLNAME)? " TMP_NAME 
+read -p "(git config) What email address do you go by on GitHub/Lab/Work? " EMAIL
+echo
+
+FULLNAME=${TMP_NAME:-$FULLNAME}
 cat .gitconfig >> "$HOME/.gitconfig"
+echo -e "\tname = $FULLNAME\n\temail = $EMAIL" >> "$HOME/.gitconfig"
 
 # SSH RSA Key
 if [ ! -e "$HOME/.ssh/id_rsa" ]; then
