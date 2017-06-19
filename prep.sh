@@ -47,8 +47,8 @@ brew cask install \
     hipchat \
     slack \
     shiftit \
+    macvim \
     caskroom/versions/firefoxdeveloperedition 
-brew cask install macvim --override-system-vim --custom-system-icons
 
 # NVM and Node
 touch ~/.bash_profile
