@@ -48,6 +48,7 @@ brew cask install \
     slack \
     shiftit \
     macvim \
+    git \
     caskroom/versions/firefoxdeveloperedition 
 
 # NVM and Node
