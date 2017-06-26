@@ -6,6 +6,7 @@
     pb=!git push -u origin $(git rev-parse --abbrev-ref HEAD)
     pat=commit --amend --no-edit
     lg-specific=log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    changed=!vim -o $(git ls-files -m)
 [push]
     default=simple
 [diff]
