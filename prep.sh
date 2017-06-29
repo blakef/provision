@@ -68,6 +68,11 @@ sudo systemsetup -setremotelogin on
 sudo dseditgroup -o create -q com.apple.access_ssh
 sudo dseditgroup -o edit -a admin -t group com.apple.access_ssh
 
+# Git auto-completion 
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+echo "test -f ~/.git-completion.bash && . ~/.git-completion.bash" >> .bash_profile
+    
+EOF
 # VIM config
 mkdir -p ~/.vim/bundle && \
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && \
