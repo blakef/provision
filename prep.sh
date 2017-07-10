@@ -1,7 +1,5 @@
 #!/bin/bash
 
-pushd ~/
-
 # Update System & commandline tools 
 softwareupdate -ia
 
@@ -49,6 +47,7 @@ brew cask install \
     shiftit \
     macvim \
     git \
+    nvim \
     caskroom/versions/firefoxdeveloperedition 
 
 # NVM and Node
@@ -72,7 +71,12 @@ sudo dseditgroup -o edit -a admin -t group com.apple.access_ssh
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 echo "test -f ~/.git-completion.bash && . ~/.git-completion.bash" >> .bash_profile
     
-EOF
+# NVIM
+cp -r .config ~/
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim +PlugInstall +qall
+
 # VIM config
 mkdir -p ~/.vim/bundle && \
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && \
@@ -82,5 +86,3 @@ mkdir -p ~/.vim/bundle && \
     ( cd ~/.vim/bundle/YouCompleteMe; python install.py --clang-completer --tern-completer --gocode-completer)
 
 sed -i'' 's/wombat256mod/wombat256/' ~/.vim/bundle/wombat256/colors/wombat256.vim
-
-popd

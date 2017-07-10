@@ -7,6 +7,13 @@
     pat=commit --amend --no-edit
     lg-specific=log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
     changed=!vim -o $(git ls-files -m)
+	branches = !git for-each-ref \
+		--sort=-committerdate \
+		--format=\"%(color:blue)%(authordate:relative)\t \
+				 %(color:red)%(authorname)\t \
+				 %(color:green)%(refname:short)\" \
+		refs/remotes \
+		| column -t -s \"\t\"
 [push]
     default=simple
 [diff]
