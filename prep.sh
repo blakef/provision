@@ -51,8 +51,17 @@ brew cask install \
     git \
     caskroom/versions/firefoxdeveloperedition 
 
-# NVM and Node
+# Git Niceness on bash prompt
 touch ~/.bash_profile
+
+cat >> ~/.bash_profile <<EOF
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+EOF
+
+# NVM and Node
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
 source ~/.bash_profile
 
@@ -72,7 +81,6 @@ sudo dseditgroup -o edit -a admin -t group com.apple.access_ssh
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 echo "test -f ~/.git-completion.bash && . ~/.git-completion.bash" >> .bash_profile
     
-EOF
 # VIM config
 mkdir -p ~/.vim/bundle && \
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && \
