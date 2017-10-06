@@ -12,6 +12,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Linting
 Plug 'w0rp/ale'
 " GoLang
@@ -20,7 +22,9 @@ Plug 'fatih/vim-go'
 Plug 'jstemmer/gotags'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 " TypeScript
+Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
+Plug 'Shougo/vimproc.vim', { 'build': {'mac' : 'make -f make_mac.mak'} }
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -158,6 +162,9 @@ highlight clear ALEErrorSign
 let g:ale_sign_warning = '⚠'
 highlight clear ALEWarningSign
 let g:airline#extensions#ale#enabled = 1
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " 
 " Lets get more efficient
