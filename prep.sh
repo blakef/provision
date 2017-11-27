@@ -33,7 +33,7 @@ fi
 TRAVIS=true /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Common Applications
-brew install cmake coreutils
+brew install cmake coreutils python3
 brew install vim --override-system-vi
 brew install gnu-sed --with-default-names
 brew tap caskroom/cask
@@ -81,6 +81,7 @@ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-com
 echo "test -f ~/.git-completion.bash && . ~/.git-completion.bash" >> .bash_profile
     
 # NVIM
+pip3 install neovim
 cp -r .config ~/
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

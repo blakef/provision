@@ -13,6 +13,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Linting
 Plug 'w0rp/ale'
 " GoLang
@@ -165,8 +166,7 @@ let g:ale_sign_warning = '⚠'
 highlight clear ALEWarningSign
 let g:airline#extensions#ale#enabled = 1
 
-" Code Completion
-let g:deoplete#enable_at_startup = 1 
+let g:deoplete#enable_at_startup = 1
 
 " 
 " Lets get more efficient
