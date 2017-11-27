@@ -12,15 +12,19 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Linting
 Plug 'w0rp/ale'
 " GoLang
-Plug 'sebdah/vim-delve'
+Plug 'godoctor/godoctor.vim'
+Plug 'jodosha/vim-godebug'
 Plug 'fatih/vim-go'
 Plug 'jstemmer/gotags'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'zchee/deoplete-go', {'build': {'unix': 'make'}}
 " TypeScript
-Plug 'Quramy/tsuquyomi'
+Plug 'mhartington/nvim-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
 " HTML
 Plug 'mattn/emmet-vim'
 
@@ -58,20 +62,22 @@ let g:go_highlight_types = 1
 
 let g:go_fmt_command = "goimports"
 
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+augroup golang
+    au FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+    au FileType go nmap <leader>t  <Plug>(go-test)
+    au FileType go nmap <leader>r  <Plug>(go-run)
+    au FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
-" Go: Docs and Defs
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    " Go: Docs and Defs
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
-" Go: Info under curosr
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
+    " Go: Info under curosr
+    au FileType go nmap <Leader>s <Plug>(go-implements)
+    au FileType go nmap <Leader>i <Plug>(go-info)
+augroup END
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -147,7 +153,7 @@ set backspace=indent,eol,start
 set foldmethod=indent
 set autoindent
 if has("autocmd")
-    autocmd BufWinEnter * silent! :%foldopen!
+    au BufWinEnter * silent! :%foldopen!
 endif
 set nowrap
 
@@ -158,6 +164,9 @@ highlight clear ALEErrorSign
 let g:ale_sign_warning = '⚠'
 highlight clear ALEWarningSign
 let g:airline#extensions#ale#enabled = 1
+
+" Code Completion
+let g:deoplete#enable_at_startup = 1 
 
 " 
 " Lets get more efficient
